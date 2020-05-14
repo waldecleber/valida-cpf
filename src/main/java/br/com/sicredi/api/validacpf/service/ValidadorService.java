@@ -4,5 +4,5 @@ import br.com.sicredi.api.validacpf.enums.StatusVote;
 
 public interface ValidadorService {
 
-	StatusVote validaCpf(String cpf);
+	StatusVote validaCpf(String cpf, Long idPauta);
 }

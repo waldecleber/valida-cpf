@@ -1,4 +1,4 @@
-package br.com.sicredi.api.validacpf.reponse;
+package br.com.sicredi.api.validacpf.response;
 
 import lombok.Data;
 

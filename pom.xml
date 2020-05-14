@@ -9,7 +9,7 @@
 		<version>2.2.7.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.clebergoncalves</groupId>
+	<groupId>br.com.sicredi</groupId>
 	<artifactId>api-valida-cpf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api-valida-cpf</name>
@@ -19,6 +19,36 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<profiles>
+        <profile>
+            <id>localhost</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <dataSource.project.jdbcURL>jdbc:mysql://localhost:3306/votacao_assembleia?createDatabaseIfNotExist=true</dataSource.project.jdbcURL>
+                <dataSource.project.username>root</dataSource.project.username>
+                <dataSource.project.password>admin</dataSource.project.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <dataSource.project.jdbcURL>jdbc:mysql://mysqldb:3306/votacao_assembleia?createDatabaseIfNotExist=true</dataSource.project.jdbcURL>
+                <dataSource.project.username>root</dataSource.project.username>
+                <dataSource.project.password>admin</dataSource.project.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>heroku</id>
+            <properties>
+                <dataSource.project.jdbcURL>jdbc:mysql://b994d85f673f0c:9799755b@us-cdbr-east-06.cleardb.net/heroku_6c23f40f9664b1d?reconnect=true</dataSource.project.jdbcURL>
+                <dataSource.project.username>b994d85f673f0c</dataSource.project.username>
+                <dataSource.project.password>9799755b</dataSource.project.password>
+            </properties>
+        </profile>
+    </profiles>
+    
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -35,6 +65,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>br.com.caelum.stella</groupId>
 			<artifactId>caelum-stella-core</artifactId>
 			<version>2.1.2</version>
@@ -44,6 +79,12 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -64,8 +105,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+			</plugin>			        
 		</plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 	</build>
 
 </project>

@@ -18,9 +18,9 @@ public class ValidaCpfController {
 	
 	private final ValidadorService validadorService;
 	
-	@GetMapping(path = "/{cpf}")
-	public ResponseEntity<StatusVote> validaCpf(@PathVariable String cpf) {		
-		return ResponseEntity.ok().body(validadorService.validaCpf(cpf));
+	@GetMapping(path = "/{cpf}/{idPauta}")
+	public ResponseEntity<StatusVote> validaCpf(@PathVariable String cpf, @PathVariable Long idPauta) {		
+		return ResponseEntity.ok().body(validadorService.validaCpf(cpf, idPauta));
 	}
 
 }
